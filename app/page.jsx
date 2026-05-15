@@ -1,18 +1,11 @@
 "use client";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowRight, Stethoscope, X } from "lucide-react";
 import Image from "next/image";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardAction,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { creditBenefits, features, testimonials } from "@/lib/data";
 import { Check } from "lucide-react";
 import {
@@ -24,8 +17,12 @@ import {
 import { Calendar } from "@/components/ui/calendar";
 
 export default function Home() {
-   const { register, handleSubmit, formState: { errors } } = useForm();
-  const onSubmit = data => console.log(data);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => console.log(data);
   console.log(errors);
 
   return (
@@ -331,97 +328,91 @@ export function AccordionBorders() {
 
 </section>} */}
 
-      <section className="py-20">
+      <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
-           <div className="text-center mb-16">
-            <Badge className="bg-emerald-900/30 border-emerald-700/30 x/px-4 py-1 text-emerald-400 text-sm font-medium mb-4">
-              Reviews
+          <div className="text-center mb-16">
+            <Badge
+              variant="outline"
+              className="bg-emerald-900/30 border-emerald-700/30 px-4 py-1 text-emerald-400 text-sm font-medium mb-4"
+            >
+              Success Stories
             </Badge>
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Testimonials
-            <p className="gradient-title mx-auto text-sm max-w-2xl color-white">What our patients say about us.</p> 
+              What Our Users Say
             </h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Hear from patients and doctors who use our platform
+            </p>
           </div>
-         
-          <div className="grid grid-cols-4 gap-4  mx-auto sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-7xl">
-            <Card className="bg-muted/20 border-emerald-900/30 mt-12 ">
-              <CardHeader>
-                <CardTitle className="text-xl font-semibold text-white">
-                  "This platform has <span className="text-emerald-400">revolutionized</span> how I access healthcare. The
-                  convenience of booking appointments and consulting with
-                  doctors from home is unparalleled."
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">- Sarah M.</p>
-                <img
-                  src="/path/to/image.jpg"
-                  alt="Sarah M."
-                  className="rounded-full w-16 h-16"
-                />
-              </CardContent>
-            </Card>{" "}
-            <Card className="bg-muted/20 border-emerald-900/30 mt-12">
-              <CardHeader>
-                <CardTitle className="text-xl font-semibold text-white">
-                  "I love how <span className="text-emerald-400">easy</span> it is to manage my healthcare with this platform. The doctors are knowledgeable, and the video consultations have been a game-changer for me."
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">- John P.</p>
-                <img
-                  src="/path/to/image.jpg"
-                  alt="John P."
-                  className="rounded-full w-16 h-16"
-                />
-              </CardContent>
-            </Card>{" "}
-            <Card className="bg-muted/20 border-emerald-900/30 mt-12">
-              <CardHeader>
-                <CardTitle className="text-xl font-semibold text-white">
-                 "Everything about this platform is <span className="text-emerald-400">fantastic</span>. The booking process is seamless, and the doctors are always <span className="t</span>ext-emerald-400">responsive</span> and helpful. I highly recommend it to anyone looking for convenient healthcare options."
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">- Adam S.</p>
-                <img
-                  src="/path/to/image.jpg"
-                  alt="Adam S."
-                  className="rounded-full w-16 h-16"
-                />
-              </CardContent>
-            </Card>{" "}
-            <Card className="bg-muted/20 border-emerald-900/30 mt-12">
-              <CardHeader>
-                <CardTitle className="text-xl font-semibold text-white">
-                  "Many <span className="text-emerald-400">thanks</span> to the team for creating such a user-friendly platform. The ability to consult with doctors remotely has made a huge difference in my life, especially during the pandemic."
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">- Alex M.</p>
-                <img
-                  src="/path/to/image.jpg"
-                  alt="Alex M."
-                  className="rounded-full w-16 h-16"
-                />
-              </CardContent>
-            </Card>{" "}
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {testimonials.map((testimonial, index) => (
+              <Card
+                key={index}
+                className="border-emerald-900/20 hover:border-emerald-800/40 transition-all"
+              >
+                <CardContent className="pt-6">
+                  <div className="flex items-center mb-4">
+                    <div className="w-12 h-12 rounded-full bg-emerald-900/20 flex items-center justify-center mr-4">
+                      <span className="text-emerald-400 font-bold">
+                        {testimonial.initials}
+                      </span>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-white">
+                        {testimonial.name}
+                      </h4>
+                      <p className="text-sm text-muted-foreground">
+                        {testimonial.role}
+                      </p>
+                    </div>
+                  </div>
+                  <p className="text-muted-foreground">
+                    &quot;{testimonial.quote}&quot;
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <Card className="bg-gradient-to-r from-emerald-900/30  to-emerald-950/20 border-emerald-800/20 ">
+            <CardContent className="p-8 md:p-12 lg:p-16 relative overflow-hidden">
+              <div className="max-w-4xl relative z-10">
+                <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+                  Ready to take control of your healthcare?
+                </h2>
+                <p className="text-lg text-muted-foreground mb-8">
+                  Join thousands of users who have simplified their healthcare
+                  journey with our platform. Get started today and experience
+                  healthcare the way it should be.
+                </p></div>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <Button
+                    asChild
+                    size="lg"
+                    className="bg-emerald-600 text-white hover:bg-emerald-700"
+                  >
+                    <Link href="/sign-up">Sign Up Now</Link>
+                  </Button>
+                  <Button
+                    asChild
+                    variant="outline"
+                    size="lg"
+                    className="border-emerald-700/30 hover:bg-muted/80"
+                  >
+                    <Link href="#pricing">View Pricing</Link>
+                  </Button>
+                 
+                </div> 
+              
+            </CardContent>
+          </Card>
+        </div>
+      </section>
 
-      <section className="py-10 bg-muted/30">
-        <div className="container mx-auto px-4 text-center">
-         
-            <form onSubmit={handleSubmit(onSubmit)}>
-      <input type="text" placeholder="First name" className="mx-auto text-sm text-white placeholder:text-muted-foreground bg-transparent border-b border-emerald-900 focus:outline-none focus:border-emerald-500"  {...register("First name", {required: true, maxLength: 80})} /><br/>
-      <input type="text" placeholder="Email" className="mx-auto text-sm text-white placeholder:text-muted-foreground bg-transparent border-b border-emerald-900 focus:outline-none focus:border-emerald-500"  {...register("Email", {required: true, pattern: /^\S+@\S+$/i})} /><br/>
-      <input type="tel" placeholder="Mobile number" className="mx-auto text-sm text-white placeholder:text-muted-foreground bg-transparent border-b border-emerald-900 focus:outline-none focus:border-emerald-500" {...register("Mobile number", {required: true, minLength: 6, maxLength: 12})} /><br/>
-
-      <input type="submit" />
-    </form>
-            </div>
-            </section>
     </div>
   );
 }
